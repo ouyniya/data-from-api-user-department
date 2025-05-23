@@ -57,6 +57,15 @@ describe("groupByDepartment", () => {
         address: { postalCode: "77777" },
         company: { department: "Support" },
       },
+      {
+        firstName: "Emily",
+        lastName: "Smith",
+        gender: "male",
+        age: 42,
+        hair: { color: "Brown" },
+        address: { postalCode: "99999" },
+        company: { department: "Sales" },
+      },
     ];
 
     const result = groupByDepartment(mockUsers);
@@ -72,13 +81,14 @@ describe("groupByDepartment", () => {
     });
 
     // Sales
-    expect(result["Sales"].male).toBe(1);
+    expect(result["Sales"].male).toBe(2);
     expect(result["Sales"].female).toBe(1);
-    expect(result["Sales"].ageRange).toBe("32-41");
-    expect(result["Sales"].hair).toEqual({ Brown: 1, Blond: 1 });
+    expect(result["Sales"].ageRange).toBe("32-42");
+    expect(result["Sales"].hair).toEqual({ Brown: 2, Blond: 1 });
     expect(result["Sales"].addressUser).toEqual({
       CharlieBrown: "99999",
       DianaPrince: "88888",
+      EmilySmith: "99999",
     });
 
     // Support
